@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:try_flutter/components/MenuItems.dart';
+
+final List<Map<String, dynamic>> _menuItems = [
+  {'title': 'Home', 'icon': Icons.home, 'page': '/home'},
+  {'title': 'To-Do List', 'icon': Icons.list, 'page': '/todo'},
+  {'title': 'Settings', 'icon': Icons.settings, 'page': '/settings'},
+  {'title': 'Logout', 'icon': Icons.logout, 'page': '/'},
+];
 
 class Sidebar extends StatelessWidget {
   const Sidebar({Key? key}) : super(key: key);
@@ -22,45 +29,9 @@ class Sidebar extends StatelessWidget {
               ],
             ),
           ),
-          ListTile(
-            title: Text('Home'),
-            onTap: () {
-              context.go('/home');
-            },
-          ),
-          ListTile(
-            title: Text('Settings'),
-            onTap: () {
-              context.go('/settings');
-            },
-          ),
-          const _Separator(),
-          ListTile(
-            title: Text('Logout'),
-            onTap: () {
-              // Navigate back to the login page
-              context.go('/');
-              // Alternatively, you can use Navigator.pop(context) if you want to go back in the navigation stack
-              // Navigator.pop(context);
-            },
-          ),
+          ..._menuItems.map((item) => buildDrawerItem(context, item['title'], item['icon'], item['page'])),
         ],
       ),
-    );
-  }
-}
-
-class _Separator extends StatelessWidget {
-  const _Separator({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      color: Theme.of(context).dividerColor,
-      height: 1,
-      thickness: 1,
-      indent: 16,
-      endIndent: 16,
     );
   }
 }

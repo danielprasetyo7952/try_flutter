@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:try_flutter/components/MenuItems.dart';
+
+final List<Map<String, dynamic>> _menuItems = [
+  {'title': 'Home', 'icon': Icons.home, 'page': '/home'},
+  {'title': 'To-Do List', 'icon': Icons.list, 'page': '/todo'},
+  {'title': 'Settings', 'icon': Icons.settings, 'page': '/settings'},
+];
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -13,7 +20,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
 
     if (isMobile) {
       return AppBar(
-        title: Text("Home Page", style: Theme.of(context).textTheme.bodyLarge),
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
@@ -23,15 +29,19 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       );
     }
     return AppBar(
-      title: Text("Home Page", style: Theme.of(context).textTheme.bodyLarge),
+      title: Row(
+        children: [
+          const FlutterLogo(size: 26),
+          const SizedBox(width: 10),
+          Text('Flutter', style: Theme.of(context).textTheme.headlineSmall),
+        ],
+      ),
       actions: [
+        ..._menuItems.map((item) => buildNavItems(context, item['title'], item['icon'], item['page'])),
         IconButton(
           icon: const Icon(Icons.logout),
           onPressed: () {
-            // Navigate back to the login page
             context.go('/');
-            // Alternatively, you can use Navigator.pop(context) if you want to go back in the navigation stack
-            // Navigator.pop(context);
           },
         ),
       ],
