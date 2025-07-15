@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    final ThemeData appsTheme = MediaQuery.of(context).platformBrightness == Brightness.dark ? darkTheme : lightTheme;
+
     return MaterialApp.router(
       routerConfig: router,
       title: "Trying Flutter",

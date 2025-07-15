@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
-ThemeData appsTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+ThemeData lightTheme = ThemeData.light().copyWith(
+  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey, brightness: Brightness.light),
+);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey, brightness: Brightness.dark),
 );
